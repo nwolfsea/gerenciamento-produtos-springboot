@@ -1,7 +1,12 @@
 package br.com.zup.Produtos.Models;
 
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 public class Produto {
+    @NotNull(message = "Nome não preenchido!")
+    @NotEmpty(message = "Nome não pode ficar em branco!")
     private String nome;
     private Double preco;
     private int quantidade;
