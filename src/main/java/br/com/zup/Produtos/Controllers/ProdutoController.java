@@ -23,6 +23,7 @@ public class ProdutoController {
     }
 
     @GetMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public List<Produto> listarProduto(){
         return produtoService.getProdutos();
     }
