@@ -1,8 +1,25 @@
 package br.com.zup.Produtos.Models;
 
+import org.hibernate.validator.constraints.br.CPF;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 public class Cliente {
+
+ @NotNull(message = "O nome deve ser preenchido!")
+ @NotEmpty(message = "O nome não deve ficar em branco!")
  private String nome;
+
+ @NotNull(message = "O CPF deve ser preenchido!")
+ @NotEmpty(message = "O CPF não deve ficar em branco!")
+ @CPF(message = "O CPF informado é inválido!")
  private String cpf;
+
+ @NotNull(message = "O email deve ser preenchido!")
+ @NotEmpty(message = "O email não deve ficar em branco!")
+ @Email(message = "O email informado é inválido!")
  private String email;
 
     public Cliente() {
