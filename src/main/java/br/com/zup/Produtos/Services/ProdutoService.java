@@ -20,7 +20,7 @@ public class ProdutoService {
             produtos.add(produto);
             return produto;
         }
-        throw new ProdutoRepetidoException();
+        throw new ProdutoRepetidoException("Produto repetido!");
     }
 
 
@@ -30,7 +30,7 @@ public class ProdutoService {
                 return produto;
             }
         }
-        throw new ProdutoNaoEncontradoException();
+        throw new ProdutoNaoEncontradoException("Produto não encontrado!");
     }
 
     public static List<Produto> getProdutos() {

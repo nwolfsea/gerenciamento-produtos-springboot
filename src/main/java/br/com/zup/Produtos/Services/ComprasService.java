@@ -1,5 +1,6 @@
 package br.com.zup.Produtos.Services;
 
+import br.com.zup.Produtos.Exceptions.CompraVaziaExcecao;
 import br.com.zup.Produtos.Exceptions.ProdutoEmFaltaException;
 import br.com.zup.Produtos.Models.Cliente;
 import br.com.zup.Produtos.Models.Compras;
@@ -58,6 +59,36 @@ public class ComprasService {
 
         return listaDeComprasDoCliente;
 
+    }
+
+    public List<Compras> mostrarTodasAsCompras() {
+        if (this.compras.size() > 0) {
+            return this.compras;
+        }
+
+        throw new CompraVaziaExcecao("Não existe compras cadastradas!");
+    }
+
+    public List<Compras> pesquisarComprasPorCpf(String cpf) {
+        List<Compras> listaDeCompras = procurarPorCpf(cpf);
+
+        if (listaDeCompras.size() > 0) {
+            return listaDeCompras;
+        }
+
+        throw new CompraVaziaExcecao("Nenhuma compra foi realizada com esse CPF");
+    }
+
+    private List<Compras> procurarPorCpf(String cpf) {
+        List<Compras> listaDeCompras = new ArrayList<>();
+
+        for (Compras compra : this.compras) {
+            if (compra.getCliente().getCpf().equalsIgnoreCase(cpf)) {
+                listaDeCompras.add(compra);
+            }
+        }
+
+        return listaDeCompras;
     }
 }
 

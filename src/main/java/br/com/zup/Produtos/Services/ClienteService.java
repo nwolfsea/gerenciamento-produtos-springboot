@@ -28,25 +28,25 @@ public class ClienteService {
                 return cliente;
             }
         }
-        throw new RuntimeException("CPF não cadastrado!");
+        throw new CPFRepetidoException("CPF repetido!");
     }
 
     public Cliente pesquisarClientePorEmail(String email) {
         for (Cliente cliente : clientes) {
-            if (cliente.getCpf().equalsIgnoreCase(email)) {
+            if (cliente.getEmail().equalsIgnoreCase(email)) {
                 return cliente;
             }
         }
-        throw new RuntimeException("CPF não cadastrado!");
+        throw new EmailRepetidoException("Email repetido!");
     }
 
     public void verificaSeClienteExiste(String cpf, String email){
         for (Cliente  cliente : clientes){
             if(cliente.getCpf().equals(cpf) ){
-                throw new CPFRepetidoException();
+                throw new CPFRepetidoException("CPF já cadastrado!");
             }
             if(cliente.getEmail().equalsIgnoreCase(email)){
-                throw new EmailRepetidoException();
+                throw new EmailRepetidoException("Email já cadastrado!");
             }
         }
     }

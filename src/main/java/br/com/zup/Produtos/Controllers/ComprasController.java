@@ -35,13 +35,14 @@ public class ComprasController {
 
     }
     @GetMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public List<Compras> listarCompras() {
-        return comprasService.getCompras();
+    @ResponseStatus(HttpStatus.OK)
+    public List<Compras> mostrarTodasAsCompras() {
+        return comprasService.mostrarTodasAsCompras();
     }
 
     @GetMapping("{cpf}/")
-    public List <Compras> listarComprasDoCliente(@PathVariable String cpf) {
-        return comprasService.listarComprasDoCliente(cpf);
+    @ResponseStatus(HttpStatus.OK)
+    public List<Compras> pesquisarComprasPorCpf(@PathVariable String cpf) {
+        return comprasService.pesquisarComprasPorCpf(cpf);
     }
 }
