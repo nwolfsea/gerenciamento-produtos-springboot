@@ -24,7 +24,7 @@ public class ProdutoService {
     }
 
 
-    private Produto pesquisarProduto(String nome) {
+    public Produto pesquisarProduto(String nome) {
         for (Produto produto : produtos) {
             if (nome.equals(produto.getNome())) {
                 return produto;

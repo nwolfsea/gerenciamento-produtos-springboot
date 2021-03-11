@@ -31,6 +31,15 @@ public class ClienteService {
         throw new RuntimeException("CPF não cadastrado!");
     }
 
+    public Cliente pesquisarClientePorEmail(String email) {
+        for (Cliente cliente : clientes) {
+            if (cliente.getCpf().equalsIgnoreCase(email)) {
+                return cliente;
+            }
+        }
+        throw new RuntimeException("CPF não cadastrado!");
+    }
+
     public void verificaSeClienteExiste(String cpf, String email){
         for (Cliente  cliente : clientes){
             if(cliente.getCpf().equals(cpf) ){
@@ -41,4 +50,6 @@ public class ClienteService {
             }
         }
     }
+
+
 }

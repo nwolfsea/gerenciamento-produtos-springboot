@@ -9,6 +9,11 @@ public class Compras {
     public Compras() {
     }
 
+    public Compras(Cliente cliente, List<Produto> produtos) {
+        this.cliente = cliente;
+        this.produtos = produtos;
+    }
+
     public Cliente getCliente() {
         return cliente;
     }
