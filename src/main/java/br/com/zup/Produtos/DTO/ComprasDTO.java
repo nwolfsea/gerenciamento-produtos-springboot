@@ -1,0 +1,36 @@
+package br.com.zup.Produtos.DTO;
+
+import org.hibernate.validator.constraints.br.CPF;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.util.List;
+
+public class ComprasDTO {
+    @NotEmpty
+    @CPF
+    private String cpf;
+
+    @NotNull
+    private List<@Valid ProdutoDTO> produtos;
+
+    public ComprasDTO() {
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public List<ProdutoDTO> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<ProdutoDTO> produtos) {
+        this.produtos = produtos;
+    }
+}

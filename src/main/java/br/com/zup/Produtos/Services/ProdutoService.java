@@ -1,5 +1,6 @@
 package br.com.zup.Produtos.Services;
 
+import br.com.zup.Produtos.Exceptions.ProdutoNaoEncontradoException;
 import br.com.zup.Produtos.Exceptions.ProdutoRepetidoException;
 import br.com.zup.Produtos.Models.Produto;
 import org.springframework.stereotype.Service;
@@ -13,14 +14,15 @@ public class ProdutoService {
     private static List<Produto> produtos = new ArrayList<>();
 
     public Produto adicionarProduto(Produto produto) {
-        Produto resultadoPesquisa = pesquisarProduto(produto.getNome());
-        if (resultadoPesquisa != null) {
-           produtos.add((produto)
-        } else {
-            Produto resultadoPesquisa = ProdutoRepetidoException(getProdutos());
+        try {
+            pesquisarProduto(produto.getNome());
+        } catch (ProdutoNaoEncontradoException erro) {
+            produtos.add(produto);
+            return produto;
         }
-        return produto;
+        throw new ProdutoRepetidoException();
     }
+
 
     private Produto pesquisarProduto(String nome) {
         for (Produto produto : produtos) {
@@ -28,7 +30,7 @@ public class ProdutoService {
                 return produto;
             }
         }
-        return null;
+        throw new ProdutoNaoEncontradoException();
     }
 
     public static List<Produto> getProdutos() {
