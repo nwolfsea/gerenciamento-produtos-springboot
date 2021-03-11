@@ -7,8 +7,6 @@ import br.com.zup.Produtos.Models.Compras;
 import br.com.zup.Produtos.Models.Produto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,7 +27,12 @@ public class ComprasService {
         compras = new ArrayList<>();
     }
 
-
+    /**
+     * Adiciona compra para o cliente
+     * @param cpf
+     * @param nome
+     * @return
+     */
     public Compras adicionarCompra(String cpf, String nome) {
         Cliente cliente = clienteService.pesquisarClientePorCpf(cpf);
         Produto produto = produtoService.pesquisarProduto(nome);
@@ -48,6 +51,11 @@ public class ComprasService {
         return compras;
     }
 
+    /**
+     * Lista as compras do cliente
+     * @param cpfDoCliente
+     * @return
+     */
     public List<Compras> listarComprasDoCliente(String cpfDoCliente) {
         List<Compras> listaDeComprasDoCliente = new ArrayList<>();
 
@@ -61,6 +69,10 @@ public class ComprasService {
 
     }
 
+    /** Mostra as compras do cliente
+     *
+     * @return
+     */
     public List<Compras> mostrarTodasAsCompras() {
         if (this.compras.size() > 0) {
             return this.compras;

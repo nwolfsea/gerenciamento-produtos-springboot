@@ -13,6 +13,11 @@ public class ProdutoService {
 
     private static List<Produto> produtos = new ArrayList<>();
 
+    /**
+     * Adiciona produto para o cliente
+     * @param produto
+     * @return
+     */
     public Produto adicionarProduto(Produto produto) {
         try {
             pesquisarProduto(produto.getNome());
@@ -24,6 +29,11 @@ public class ProdutoService {
     }
 
 
+    /**
+     * Pesquisa produto para o cliente
+     * @param nome
+     * @return
+     */
     public Produto pesquisarProduto(String nome) {
         for (Produto produto : produtos) {
             if (nome.equals(produto.getNome())) {
@@ -37,6 +47,10 @@ public class ProdutoService {
         return produtos;
     }
 
+    /**
+     * Mostra produto para o cliente
+     * @return
+     */
     public List<Produto> mostrarProdutos() {
         if (produtos.size() > 0) {
             return produtos;

@@ -12,6 +12,10 @@ import java.util.List;
 public class ClienteService {
     private static List<Cliente> clientes = new ArrayList<>();
 
+    /**
+     * Adiciona cliente na lista
+     * @param cliente
+     */
     public void adicionarCliente(Cliente cliente){
         verificaSeClienteExiste(cliente.getCpf(), cliente.getEmail());
         clientes.add(cliente);
@@ -22,6 +26,11 @@ public class ClienteService {
         return clientes;
     }
 
+    /**
+     * Pesquisa cliente por CPF
+     * @param cpf
+     * @return
+     */
     public Cliente pesquisarClientePorCpf(String cpf) {
         for (Cliente cliente : clientes) {
             if (cliente.getCpf().equalsIgnoreCase(cpf)) {
@@ -31,6 +40,11 @@ public class ClienteService {
         throw new CPFRepetidoException("CPF repetido!");
     }
 
+    /**
+     * Pesquisa cliente por email
+     * @param email
+     * @return
+     */
     public Cliente pesquisarClientePorEmail(String email) {
         for (Cliente cliente : clientes) {
             if (cliente.getEmail().equalsIgnoreCase(email)) {
@@ -40,6 +54,11 @@ public class ClienteService {
         throw new EmailRepetidoException("Email repetido!");
     }
 
+    /**
+     * Verifica se o cliente existe utilizando cpf e email
+     * @param cpf
+     * @param email
+     */
     public void verificaSeClienteExiste(String cpf, String email){
         for (Cliente  cliente : clientes){
             if(cliente.getCpf().equals(cpf) ){
