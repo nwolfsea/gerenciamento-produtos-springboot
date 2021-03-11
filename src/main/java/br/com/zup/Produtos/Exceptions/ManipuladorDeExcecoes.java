@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,8 +27,6 @@ public class ManipuladorDeExcecoes extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(status).body(respostaDeErro);
     }
 
-    @ExceptionHandler({RuntimeException.class})
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     private List<ObjetoDeErro> getObjetosDeErro(MethodArgumentNotValidException ex) {
         List<ObjetoDeErro> objetoDeErros = ex.getBindingResult()
                 .getFieldErrors().stream()
@@ -35,5 +34,22 @@ public class ManipuladorDeExcecoes extends ResponseEntityExceptionHandler {
                 .collect(Collectors.toList());
         return objetoDeErros;
     }
+
+    @ExceptionHandler(CPFRepetidoException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public RespostaDeErro cpfRepetidoException(CPFRepetidoException cpfRepetidoException) {
+        ObjetoDeErro objetoDeErro = new ObjetoDeErro(cpfRepetidoException.getMessage(),"CPF");
+        RespostaDeErro respostaDeErro= new RespostaDeErro("Bad Request", 400, "400", Arrays.asList(objetoDeErro));
+        return respostaDeErro;
+    }
+
+    @ExceptionHandler(EmailRepetidoException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public RespostaDeErro emailRepetido(EmailRepetidoException emailRepetidoException) {
+        ObjetoDeErro objetoDeErro = new ObjetoDeErro(emailRepetidoException.getMessage(),"email");
+        RespostaDeErro respostaDeErro= new RespostaDeErro("Bad Request", 400, "400", Arrays.asList(objetoDeErro));
+        return respostaDeErro;
+    }
+
 
 }

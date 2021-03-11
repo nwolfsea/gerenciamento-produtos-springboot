@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
-public class RespostaDeErro {
+public class RespostaDeErro  {
         private String tipoDeErro;
         private int codigoDoErro;
         private String statusCode;

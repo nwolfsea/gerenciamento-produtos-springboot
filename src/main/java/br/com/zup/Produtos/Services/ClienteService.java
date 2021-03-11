@@ -1,5 +1,7 @@
 package br.com.zup.Produtos.Services;
 
+import br.com.zup.Produtos.Exceptions.CPFRepetidoException;
+import br.com.zup.Produtos.Exceptions.EmailRepetidoException;
 import br.com.zup.Produtos.Models.Cliente;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,7 @@ public class ClienteService {
     private static List<Cliente> clientes = new ArrayList<>();
 
     public void adicionarCliente(Cliente cliente){
+        verificaSeClienteExiste(cliente.getCpf(), cliente.getEmail());
         clientes.add(cliente);
     }
 
@@ -28,7 +31,14 @@ public class ClienteService {
         throw new RuntimeException("CPF não cadastrado!");
     }
 
-
-
-
+    public void verificaSeClienteExiste(String cpf, String email){
+        for (Cliente  cliente : clientes){
+            if(cliente.getCpf().equals(cpf) ){
+                throw new CPFRepetidoException();
+            }
+            if(cliente.getEmail().equalsIgnoreCase(email)){
+                throw new EmailRepetidoException();
+            }
+        }
+    }
 }
