@@ -51,5 +51,12 @@ public class ManipuladorDeExcecoes extends ResponseEntityExceptionHandler {
         return respostaDeErro;
     }
 
+    @ExceptionHandler(ProdutoRepetidoException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public RespostaDeErro produtoRepetido(ProdutoRepetidoException produtoRepetidoException) {
+        ObjetoDeErro objetoDeErro = new ObjetoDeErro(produtoRepetidoException.getMessage(),"produto");
+        RespostaDeErro respostaDeErro= new RespostaDeErro("Bad Request", 400, "400", Arrays.asList(objetoDeErro));
+        return respostaDeErro;
+    }
 
 }
